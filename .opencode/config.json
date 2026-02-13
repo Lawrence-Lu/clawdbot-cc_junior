@@ -1,0 +1,15 @@
+{
+  "project": {
+    "name": "clawdbot",
+    "type": "nodejs",
+    "description": "飞书机器人服务"
+  },
+  "server": {
+    "host": "111.231.55.119",
+    "workspace": "/root/.openclaw/workspace/"
+  },
+  "git": {
+    "autoCommit": false,
+    "defaultBranch": "master"
+  }
+}

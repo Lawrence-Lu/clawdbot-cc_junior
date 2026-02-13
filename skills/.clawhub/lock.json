@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "neo-ddg-search": {
+      "version": "1.0.0",
+      "installedAt": 1770854784514
+    },
+    "baidu-search": {
+      "version": "1.0.6",
+      "installedAt": 1770854790871
+    },
+    "bocha-search": {
+      "version": "1.0.0",
+      "installedAt": 1770854793578
+    },
+    "feishu-calendar": {
+      "version": "1.0.2",
+      "installedAt": 1770868525576
+    },
+    "feishu-task": {
+      "version": "1.0.1",
+      "installedAt": 1770874075238
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "music-charts",
+  "version": "1.0.0",
+  "description": "每日多语言音乐榜单推送",
+  "main": "music-charts.js",
+  "scripts": {
+    "start": "node music-charts.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.5"
+  }
+}

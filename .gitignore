@@ -1,0 +1,19 @@
+# Sensitive files
+.env
+.user_token.json
+*.token.json
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
