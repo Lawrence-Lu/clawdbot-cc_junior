@@ -57,29 +57,88 @@ async function fetchJapaneseChart() {
   console.log('\n🎵 抓取日语榜...');
   
   const html = await fetchPage(CONFIG.japanese.url);
-  if (!html) return null;
+  if (!html) {
+    console.log('   ⚠️ 网页抓取失败，使用备用数据');
+    return getJapaneseBackupData();
+  }
   
-  // Billboard Japan 页面解析 - 从之前的成功抓取中提取模式
-  // 榜单数据在特定结构中，使用更精确的匹配
+  // 从HTML中解析榜单
+  // Billboard Japan 页面结构：歌曲名和歌手名在特定位置
   const songs = [];
+  const lines = html.split('\n').map(l => l.trim()).filter(l => l);
   
-  // 尝试匹配歌曲名（日文歌曲通常包含日文汉字或假名）
-  // 基于之前成功抓取的HTML结构
-  const songPatterns = [
-    { title: '好きすぎて滅!', artist: 'M!LK' },
-    { title: 'JANE DOE', artist: '米津玄師 × 宇多田ヒカル' },
-    { title: 'NON STOP', artist: 'HANA' },
-    { title: 'BANQUET BANG', artist: 'MAZZEL' },
-    { title: 'アイ・ジャスト・マイト', artist: 'Bruno Mars' }
-  ];
+  for (let i = 0; i < lines.length && songs.length < 5; i++) {
+    const line = lines[i];
+    
+    // 匹配日文歌曲名（包含日文汉字/假名/英文）
+    // 并且不是URL、不是代码、不是数字排名
+    if (/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(line) && 
+        line.length < 50 && 
+        !line.includes('http') && 
+        !line.includes('/') &&
+        !line.includes('function') &&
+        !line.includes('var ') &&
+        !line.startsWith('チャートイン') &&
+        !line.startsWith('前回') &&
+        !line.startsWith('総合ポイント') &&
+        !line.startsWith('全国推定売上') &&
+        isNaN(line.replace(/,/g, ''))) {
+      
+      // 查找歌手名（通常在下一行，格式是 [歌手名] 或 纯文本）
+      let artist = 'Unknown';
+      for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+        const nextLine = lines[j];
+        // 歌手名通常在 [/artists/detail/xxx] 这种格式中
+        if (nextLine.includes('artists/detail/')) {
+          const artistMatch = nextLine.match(/\[([^\]]+)\]/);
+          if (artistMatch) {
+            artist = artistMatch[1];
+            break;
+          }
+        }
+        // 或者纯文本歌手名（不包含特殊标记）
+        if (nextLine.length < 30 && 
+            !nextLine.includes('<') && 
+            !nextLine.includes('http') &&
+            (nextLine.includes('、') || /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(nextLine))) {
+          artist = nextLine;
+          break;
+        }
+      }
+      
+      songs.push({
+        rank: songs.length + 1,
+        title: line,
+        artist: artist
+      });
+    }
+  }
   
-  // 尝试从页面中提取，如果失败则使用备用数据
-  // Billboard Japan 的页面结构复杂，目前使用可靠的备用数据
+  // 如果提取的歌曲少于5个，说明解析可能有问题，使用备用数据
+  if (songs.length < 5) {
+    console.log(`   ⚠️ 只提取到 ${songs.length} 首歌曲，使用备用数据`);
+    return getJapaneseBackupData();
+  }
   
   return {
     name: CONFIG.japanese.name,
     date: new Date().toLocaleDateString('zh-CN'),
-    songs: songPatterns.map((s, i) => ({ ...s, rank: i + 1 }))
+    songs: songs.slice(0, 5)
+  };
+}
+
+// 日语榜备用数据（从网页手动抓取的真实数据）
+function getJapaneseBackupData() {
+  return {
+    name: '🇯🇵 Billboard Japan Hot 100',
+    date: new Date().toLocaleDateString('zh-CN'),
+    songs: [
+      { rank: 1, title: '好きすぎて滅!', artist: 'M!LK' },
+      { rank: 2, title: 'JANE DOE', artist: '米津玄師, 宇多田ヒカル' },
+      { rank: 3, title: 'NON STOP', artist: 'HANA' },
+      { rank: 4, title: 'BANQUET BANG', artist: 'MAZZEL' },
+      { rank: 5, title: 'アイ・ジャスト・マイト', artist: 'Bruno Mars' }
+    ]
   };
 }
 
