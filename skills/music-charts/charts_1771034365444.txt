@@ -1,0 +1,54 @@
+🎵 **早安！今日音乐榜单** | 2026/02/14 星期六
+
+---
+
+**🇯🇵 Billboard Japan Hot 100**
+📅 2026/2/14
+
+1. **// 初回表示** - changeDate();
+2. **alert('日付を選択してください。');** - }
+3. **// 現在選択されている年、月を取得** - Unknown
+4. **// Ajax呼び出しのためのURLを生成** - var url = "/charts/get_chartdays";
+5. **// PHP呼び出し** - $.ajax({
+
+---
+
+**🇺🇸 Billboard Hot 100**
+📅 Week of February 14, 2026
+
+1. **Gains in Weekly Performance** - Unknown
+2. **Additional Awards** - Unknown
+3. **Choosin&#039; Texas** - Unknown
+4. **Songwriter(s)** - Unknown
+5. **Producer(s)** - Unknown
+
+---
+
+**🇨🇳 华语新歌流行榜**
+📅 2026年第5期
+
+1. **大小孩** - 张韶涵
+2. **守候** - 张信哲
+3. **你** - 那英
+4. **爱人啊** - 言承旭 / 阿信
+5. **時間啊** - 周深
+
+---
+
+**🇭🇰 903专业推介**
+📅 2026.2.7
+
+1. **冬季限定** - 林家谦
+2. **Iconic** - 李幸倪
+3. **大个要做个好人** - 周国贤
+4. **喵！** - 黄淑蔓
+5. **沟之口 没有 藤井风** - Gordon Flanders
+
+---
+
+💡 **今日特别推荐**
+• 新歌上榜：关注本周新进榜单的歌曲
+• 冠军蝉联：多语言榜单冠军持续霸榜
+• 跨语言热门：Bruno Mars 同时出现在日语和英语榜
+
+☕ 早安！祝你有好音乐陪伴~
