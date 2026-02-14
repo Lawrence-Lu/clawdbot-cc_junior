@@ -30,13 +30,17 @@ function createMenuTemplate(weekStartDate) {
         main: "",
         sub: [],
         vegetable: "",
-        soup: ""
+        soup: "",
+        staple: "",
+        noodles: ""
       },
       dinner: {
         main: "",
         sub: [],
         vegetable: "",
-        soup: ""
+        soup: "",
+        staple: "",
+        noodles: ""
       }
     };
   });
@@ -84,6 +88,8 @@ async function interactiveInput() {
     menuData.menu[day].lunch.sub = lunchSub.split('、').map(s => s.trim()).filter(s => s);
     menuData.menu[day].lunch.vegetable = await question('    素菜: ');
     menuData.menu[day].lunch.soup = await question('    汤品: ');
+    menuData.menu[day].lunch.staple = await question('    主食: ');
+    menuData.menu[day].lunch.noodles = await question('    面食: ');
     
     // 晚餐
     console.log('  晚餐:');
@@ -92,6 +98,8 @@ async function interactiveInput() {
     menuData.menu[day].dinner.sub = dinnerSub.split('、').map(s => s.trim()).filter(s => s);
     menuData.menu[day].dinner.vegetable = await question('    素菜: ');
     menuData.menu[day].dinner.soup = await question('    汤品: ');
+    menuData.menu[day].dinner.staple = await question('    主食: ');
+    menuData.menu[day].dinner.noodles = await question('    面食: ');
   }
   
   rl.close();

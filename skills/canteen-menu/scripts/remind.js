@@ -77,6 +77,14 @@ function formatLunchMessage(menu) {
     msg += `🍲 **汤品**：${lunch.soup}\n`;
   }
   
+  if (lunch.staple) {
+    msg += `🍚 **主食**：${lunch.staple}\n`;
+  }
+  
+  if (lunch.noodles) {
+    msg += `🍜 **面食**：${lunch.noodles}\n`;
+  }
+  
   msg += `\n记得去吃饭哦！😊`;
   
   return msg;
@@ -102,6 +110,14 @@ function formatDinnerMessage(menu) {
   
   if (dinner.soup) {
     msg += `🍲 **汤品**：${dinner.soup}\n`;
+  }
+  
+  if (dinner.staple) {
+    msg += `🍚 **主食**：${dinner.staple}\n`;
+  }
+  
+  if (dinner.noodles) {
+    msg += `🍜 **面食**：${dinner.noodles}\n`;
   }
   
   msg += `\n记得去吃饭哦！😊`;
